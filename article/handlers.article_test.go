@@ -1,4 +1,4 @@
-package main
+package journal
 
 import (
 	"io/ioutil"
@@ -13,7 +13,7 @@ import (
 func TestShowIndexPageUnauthenticated(t *testing.T) {
 	r := getRouter(true)
 
-	r.GET("/", showIndexPage)
+	r.GET("/", ShowIndexPage)
 
 	// Create a request to send to the above route
 	req, _ := http.NewRequest("GET", "/", nil)

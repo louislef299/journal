@@ -1,4 +1,4 @@
-module github.com/louislef299/todo
+module github.com/louislef299/journal
 
 go 1.18
 

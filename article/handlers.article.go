@@ -1,4 +1,4 @@
-package main
+package journal
 
 import (
 	"net/http"
@@ -7,21 +7,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func showIndexPage(c *gin.Context) {
+func ShowIndexPage(c *gin.Context) {
 	entries := getAllEntries()
 
 	// Call the render function with the name of the template to render
-	render(c, gin.H{
+	Render(c, gin.H{
 		"title":   "Home Page",
 		"payload": entries}, "index.html")
 }
 
-func getEntry(c *gin.Context) {
+func GetEntry(c *gin.Context) {
 	// Check if the article ID is valid
 	if date, err := strconv.Atoi(c.Param("date")); err == nil {
 		// Check if the article exists
 		if entry, err := getEntryByDate(date); err == nil {
-			render(c, gin.H{
+			Render(c, gin.H{
 				"title":   entry.Title,
 				"payload": entry,
 			}, "entry.html")
@@ -35,7 +35,7 @@ func getEntry(c *gin.Context) {
 	}
 }
 
-func addEntry(c *gin.Context) {
+func AddEntry(c *gin.Context) {
 	newEntry := entry{}
 	if err := c.Bind(&newEntry); err == nil {
 		/*today := time.Now()
@@ -54,7 +54,7 @@ func addEntry(c *gin.Context) {
 // Render one of HTML, JSON or CSV based on the 'Accept' header of the request
 // If the header doesn't specify this, HTML is rendered, provided that
 // the template name is present
-func render(c *gin.Context, data gin.H, templateName string) {
+func Render(c *gin.Context, data gin.H, templateName string) {
 	switch c.Request.Header.Get("Accept") {
 	case "application/json":
 		c.JSON(http.StatusOK, data["payload"])
