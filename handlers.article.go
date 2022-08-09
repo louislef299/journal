@@ -16,15 +16,15 @@ func showIndexPage(c *gin.Context) {
 		"payload": articles}, "index.html")
 }
 
-func getArticle(c *gin.Context) {
+func getEntry(c *gin.Context) {
 	// Check if the article ID is valid
-	if articleID, err := strconv.Atoi(c.Param("article_id")); err == nil {
+	if date, err := strconv.Atoi(c.Param("date")); err == nil {
 		// Check if the article exists
-		if article, err := getArticleByID(articleID); err == nil {
+		if entry, err := getEntryByDate(date); err == nil {
 			render(c, gin.H{
-				"title":   article.Title,
-				"payload": article,
-			}, "article.html")
+				"title":   entry.Title,
+				"payload": entry,
+			}, "entry.html")
 		} else {
 			// If the article is not found, abort with an error
 			c.AbortWithError(http.StatusNotFound, err)
@@ -39,16 +39,12 @@ func getArticle(c *gin.Context) {
 // If the header doesn't specify this, HTML is rendered, provided that
 // the template name is present
 func render(c *gin.Context, data gin.H, templateName string) {
-
 	switch c.Request.Header.Get("Accept") {
 	case "application/json":
-		// Respond with JSON
 		c.JSON(http.StatusOK, data["payload"])
 	case "application/xml":
-		// Respond with XML
 		c.XML(http.StatusOK, data["payload"])
 	default:
-		// Respond with HTML
 		c.HTML(http.StatusOK, templateName, data)
 	}
 

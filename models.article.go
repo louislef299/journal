@@ -2,24 +2,28 @@ package main
 
 import "errors"
 
-type article struct {
-	ID      int    `json:"id"`
+type entry struct {
+	Date    int    `json:"Date"`
 	Title   string `json:"title"`
 	Content string `json:"content"`
 }
 
-var articleList = []article{
-	{ID: 1, Title: "Article 1", Content: "Article 1 body"},
-	{ID: 2, Title: "Article 2", Content: "Article 2 body"},
+var entryList = []entry{
+	{Date: 1, Title: "finish codebase", Content: "transform the codebase into a journal"},
+	{Date: 2, Title: "add ci/cd capabilities", Content: "add gitactions to both test the codebase and deploy it to docker"},
+	{Date: 3, Title: "add persistent storage", Content: "give the todo application persistent storage(have to decDatee which type of storage)"},
+	{Date: 4, Title: "deploy on minikube", Content: "deploy the todo app on minikube"},
+	{Date: 5, Title: "deploy on eks", Content: "deploy your todo app on eks"},
+	{Date: 6, Title: "automate minikube to eks deployment", Content: "automate the deployment from making local changes, testing those local changes, using github actions to test and deploy the new image to the eks cluster"},
 }
 
-func getAllArticles() []article {
-	return articleList
+func getAllArticles() []entry {
+	return entryList
 }
 
-func getArticleByID(id int) (*article, error) {
-	for _, a := range articleList {
-		if a.ID == id {
+func getEntryByDate(Date int) (*entry, error) {
+	for _, a := range entryList {
+		if a.Date == Date {
 			return &a, nil
 		}
 	}

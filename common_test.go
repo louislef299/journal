@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var tmpArticleList []article
+var tmpEntryList []entry
 
 // This function is used for setup before executing the test functions
 func TestMain(m *testing.M) {
@@ -45,10 +45,10 @@ func testHTTPResponse(t *testing.T, r *gin.Engine, req *http.Request, f func(w *
 // This function is used to store the main lists into the temporary one
 // for testing
 func saveLists() {
-	tmpArticleList = articleList
+	tmpEntryList = entryList
 }
 
 // This function is used to restore the main lists from the temporary one
 func restoreLists() {
-	articleList = tmpArticleList
+	entryList = tmpEntryList
 }
