@@ -10,6 +10,7 @@ func main() {
 	router = gin.Default()
 	router.LoadHTMLGlob("templates/*")
 
+	// curl -X GET -H "Accept: application/json" http://localhost:8080/
 	router.GET("/", showIndexPage)
 	router.GET("/journal/view/:date", getEntry)
 	router.POST("journal", addEntry)
