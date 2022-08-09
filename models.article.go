@@ -17,7 +17,7 @@ var entryList = []entry{
 	{Date: 6, Title: "automate minikube to eks deployment", Content: "automate the deployment from making local changes, testing those local changes, using github actions to test and deploy the new image to the eks cluster"},
 }
 
-func getAllArticles() []entry {
+func getAllEntries() []entry {
 	return entryList
 }
 

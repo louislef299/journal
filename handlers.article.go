@@ -8,12 +8,12 @@ import (
 )
 
 func showIndexPage(c *gin.Context) {
-	articles := getAllArticles()
+	entries := getAllEntries()
 
 	// Call the render function with the name of the template to render
 	render(c, gin.H{
 		"title":   "Home Page",
-		"payload": articles}, "index.html")
+		"payload": entries}, "index.html")
 }
 
 func getEntry(c *gin.Context) {
