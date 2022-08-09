@@ -35,6 +35,22 @@ func getEntry(c *gin.Context) {
 	}
 }
 
+func addEntry(c *gin.Context) {
+	newEntry := entry{}
+	if err := c.Bind(&newEntry); err == nil {
+		/*today := time.Now()
+		newEntry.Date, err = strconv.Atoi(fmt.Sprintf("%v%v%v", today.Day(), today.Month(), today.Year()))
+		if err != nil {
+			panic(err)
+		}*/
+		newEntry.Date = len(entryList) + 1
+		entryList = append(entryList, newEntry)
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	} else {
+		c.AbortWithError(http.StatusInternalServerError, err)
+	}
+}
+
 // Render one of HTML, JSON or CSV based on the 'Accept' header of the request
 // If the header doesn't specify this, HTML is rendered, provided that
 // the template name is present
