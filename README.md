@@ -6,3 +6,5 @@ The goal of this project is to create a simple todo server that can persist data
 
 To run a live development session with air, run:
 `docker run -it --rm -w $(pwd) -v $(pwd):$(pwd) -dp 8080:8080 cosmtrek/air`
+
+This works because of using a [bind mount](https://docs.docker.com/get-started/06_bind_mounts/) shortens the development time to see changes instantly withouts needing all of the build tools and environments installed. Since the environment is technically your project, and since there are tools that will automatically update for filesystem changes, this makes developing at speed much faster! 
